@@ -76,3 +76,7 @@ variable "rds_backup_keepdays" {
 
 variable "time_zone" {
 }
+
+variable "rds_fixed_ip" {
+}
+

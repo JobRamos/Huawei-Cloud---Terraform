@@ -1,5 +1,4 @@
 ### Provider Huawei Cloud ## 
-
 terraform {
   required_providers {
     huaweicloud = {
@@ -26,10 +25,25 @@ resource "null_resource" "provision" {
       host        = "${data.huaweicloud_compute_instance.ecs_generic_instance.public_ip}"  ## the EIP address of the ECS ##
     }
 
+
     inline = [
       ### Execute the commands in the Target ECS ###
       "chmod 744 ${var.remote_exec_path}/${var.remote_exec_filename}",  
-      "bash ${var.remote_exec_path}/${var.remote_exec_filename}"  
+      "bash ${var.remote_exec_path}/${var.remote_exec_filename}",
+
+      # "echo '${var.rds_ip}' > ip_rds",
+
+      "mysql --user=root --host=10.10.1.158 --password=Huawei123+ -e 'create database db_demo';",
+
+      "cd ecommerce_mysql/",
+      "mysql --user=root --host=10.10.1.158 --password=Huawei123+ db_demo < db_demo.sql",
+
+      # "cd config/",
+      # "sed -i '6i    host: ${var.rds_ip},' database.js",
+      # "cd ..",
+
+      "npm install pm2 -g",
+      "pm2 start ./bin/www.js"
     ]
   }
 }

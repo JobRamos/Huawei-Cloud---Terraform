@@ -15,3 +15,6 @@ variable "remote_exec_path" {
 
 variable "remote_exec_filename" {
 }
+
+# variable "rds_ip" {
+# }
